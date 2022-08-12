@@ -1,0 +1,59 @@
+:root {
+    --grayscale: grey;
+
+}
+
+html {
+    height: 100%;
+}
+
+.strimp {
+    --startX: 50%;
+    --startY: 50%;
+    --endX: 50%;
+    --endY: 50%;
+
+    display: flex;
+    width: max-content;
+    position: absolute;
+    animation: slide;
+    animation-duration: 1000ms;
+    animation-fill-mode: forwards;
+
+    filter: brightness(100%);
+}
+.strimp:hover {
+    filter: brightness(80%);
+}
+
+@keyframes slide {
+    from {left: var(--startX); top: var(--startY);}
+    to {left: var(--endX); top: var(--endY);}
+}
+
+
+body {
+    background-color: grey;
+}
+
+#gameBoard {
+    width: auto;
+    height: auto;
+}
+
+#hud {
+    background-color: black;
+    color: white;
+
+    width: 10%;
+    height: 2.5%;
+    font-size: 150%;
+
+    position: sticky;
+    overflow: visible;
+    z-index: 999999999999999999;
+}
+
+#strimpCounter {
+    overflow-wrap: break-word;
+}
