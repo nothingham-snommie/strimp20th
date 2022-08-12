@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
     console.log("loaded DOM");
-    updateHUD();
+    updateCounter();
 });
 
-function updateHUD() {
-    hud = document.getElementById("strimpCounter");
-    hud.innerHTML = totalStrimps;
+function updateCounter() {
+    let counter = document.getElementById("strimpCounter");
+    counter.innerHTML = totalStrimps;
 }

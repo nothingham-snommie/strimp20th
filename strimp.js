@@ -1,7 +1,6 @@
 var totalStrimps = 1;
-
 const I_Am_Going_To_Split_Up_Into_Three = new Audio("audio/i_am_going_to_split_up_into_three.mp3");
-//I_Am_Going_To_Split_Up_Into_Three.play();
+var specialStrimpChance = 0.1;
 
 document.addEventListener("DOMContentLoaded", function() {
     console.log("loaded DOM");
@@ -14,17 +13,24 @@ function createStrimp(id, zindex, posX, posY, newPosX, newPosY) { // posX, posY 
     let img = document.createElement("img");
     strimp.className = "strimp"; // for css
     strimp.style.zIndex = zindex; // i don't think this actually matters but my gut says to keep it
-    img.src = "images/strimpblob.png";
 
+    let imgID = 0;
     // roundabout method to prevent jank and jitter from constantly clicking
     // makes the strimp unclickable for ~0.2 sec upon creation (unless it's the original)
     let canClick = false; 
     if (id == -1) {
         canClick = true;
+        imgID = 0; // also set imgID because i already have an if here
     }
     else {
         canClick = setTimeout(function() {canClick=true;}, 1170);
+        if (Math.random() > (1-specialStrimpChance)) {
+            imgID = randSpecialStrimp(1,9);
+        }
     }
+
+    console.log(imgID);
+    img.src = "images/"+imgID+".png";
 
     strimp.style.setProperty("--startX", ((posX/screen.width)*100)+"%");
     strimp.style.setProperty("--startY", ((posY/screen.height)*100)+"%");
@@ -62,7 +68,7 @@ function createStrimp(id, zindex, posX, posY, newPosX, newPosY) { // posX, posY 
             canClick = false;
             I_Am_Going_To_Split_Up_Into_Three.cloneNode(true).play();
             setTimeout(function() {
-                splitUpIntoX(3);
+                splitUpIntoX(imgID+3);
                 console.log("i am going to    split up into three")
             }, 2340)
         }
@@ -80,10 +86,26 @@ function pol2cart(r, theta) {
 
 function addStrimp(amount) { // redundant???
     totalStrimps += amount;
-    updateHUD();
+    updateCounter();
 }
 
 function playTheFunny() {
     I_Am_Going_To_Split_Up_Into_Three.play();
 
 }
+
+function randSpecialStrimp(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    let random = Math.round(100*Math.random());
+    let specialStrimpID = 0;
+
+    for (let i=min; i<max; i++) {
+        if (random % i == 0) {
+            specialStrimpID = i;
+        }
+    }
+
+    return specialStrimpID;
+  }
+  
