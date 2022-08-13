@@ -40,6 +40,13 @@ function createStrimp(id, zindex, posX, posY, newPosX, newPosY) { // posX, posY 
     posX = newPosX; // now posX, Y refer to the child (self)'s CURRENT position
     posY = newPosY; // ayuda por favor
 
+    if (strimp.getBoundingClientRect().right > screen.width || strimp.getBoundingClientRect().left < 0) {
+        strimp.remove();
+    }
+    if (strimp.getBoundingClientRect().top > screen.height || strimp.getBoundingClientRect().bottom < 0) {
+        strimp.remove();
+    }
+
     let r = (screen.width/10)+(totalStrimps/100); // radius
     let t = 0; // theta
     let angleVariance = 1/4;
