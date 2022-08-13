@@ -24,7 +24,7 @@ function createStrimp(id, zindex, posX, posY, newPosX, newPosY) { // posX, posY 
     }
     else {
         canClick = setTimeout(function() {canClick=true;}, 1170);
-        if (Math.random() > (1-specialStrimpChance)) {
+        if (Math.random() < specialStrimpChance) {
             imgID = randSpecialStrimp(1,9);
         }
     }
